@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dash.css"> <!-- External CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
+    <script src="dash.js"></script>
+    <script src="orders.js"></script>
+    <title>Add_Products</title>
+    <style>
+        /* Right content styles */
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    padding: 20px;
+    max-width: 100%;
+}
+
+.form-container {
+    background-color: #504c4c38;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1000px; /* Reduce form size */
+    max-height: 500px;
+    box-sizing: border-box;
+    margin-top: 50px; /* Adds space under the top bar */
+}
+
+h2 {
+    text-align: center;
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Form Group */
+.form-group {
+    margin-bottom: 10px;
+}
+
+label {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* Input Fields */
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+}
+
+input[type="file"] {
+    padding: 8px;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Focus Effect for Input Fields */
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus,
+textarea:focus {
+    border-color: #4CAF50;
+    outline: none;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
+
+/* Button */
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Image Preview */
+.image-preview {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.image-preview img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-top: 10px;
+}
+
+/* Top bar style */
+.top-bar {
+    background-color: #333;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.top-bar .logo {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.top-bar .logo span {
+    color: #4CAF50; /* Color for highlight */
+}
+
+/* Sidebar Menu Styles */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: -250px; /* Sidebar hidden initially */
+    background-color: #333;
+    color: #fff;
+    transition: left 0.3s ease-in-out;
+    padding-top: 30px;
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar.show {
+    left: 0; /* Show sidebar */
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #fff;
+    padding: 15px;
+    display: block;
+    font-size: 18px;
+}
+
+.sidebar a:hover {
+    background-color: #4CAF50;
+}
+
+.sidebar .close {
+    position: absolute;
+    top: 20px;
+    left: 15px;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+/* Sidebar Toggle Button */
+.menu-toggle {
+    font-size: 30px;
+    color: #333;
+    cursor: pointer;
+    z-index: 1100; /* Ensure it overlaps the sidebar */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .form-container {
+        width: 90%;
+        max-width: 400px; /* Shrink form width for smaller screens */
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .top-bar {
+        padding: 10px 15px;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .sidebar {
+        width: 200px;
+    }
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="container" style="margin-left: 100px; height: 500px;">
+        <div class="menu-toggle" id="menu-toggle-btn">
+            <i class='bx bx-menu'></i>  <!-- Menu Icon (hamburger) -->
+        </div>
+        <aside class="hide">
+            <div class="top">
+                <div class="logo">
+                    <img src="logo.webp">
+                    <h2>EGA<span class="danger">TOR</span></h2>
+                </div>
+                <div class="close" id="close-btn">
+                    <i class='bx bx-message-square-x'></i>
+                </div>
+            </div>
+            <div class="sidebar">
+                <a href="index.html">
+                    <i class='bx bxs-dashboard'></i>
+                    <h3>Dashboard</h3>
+                </a>
+                <a href="Dashboard.html" class="active">
+                    <i class='bx bxs-contact'></i>
+                    <h3>All</h3>
+                </a>
+                <a href="msg.html">
+                    <i class='bx bx-receipt'></i>
+                    <h3>Customers</h3>
+                </a>
+                <a href="ana.html">
+                    <i class='bx bx-analyse'></i>
+                    <h3>Analytics</h3>
+                </a>
+                <a href="msg.html">
+                    <i class='bx bx-envelope'></i>
+                    <h3>Messages</h3>
+                    <span class="message-count">26</span>
+                </a>
+                <a href="prod.html">
+                    <i class='bx bxl-product-hunt'></i>
+                    <h3>Products</h3>
+                </a>
+                <a href="report.html">
+                    <i class='bx bxs-report'></i>
+                    <h3>Reports</h3>
+                </a>
+                <a href="add_prod.html">
+                    <i class='bx bx-plus'></i>
+                    <h3>Add Product</h3>
+                </a>
+                <a href="set.html">
+                    <i class='bx bx-log-out'></i>
+                    <h3>Logout</h3>
+                </a>
+            </div>
+        </aside>
+
+    <div class="right">
+        <div class="top"  style=" margin-left: auto; width: 800px;" >
+            <button id="menu-btn">
+                <i class='bx bx-menu'></i>
+            </button>
+            <div class="profile">
+                <div class="info">
+                    <p>Hey, <b>Aliza</b></p>
+                    <small class="text-muted">Admin</small>
+                </div>
+                <div class="profile-photo">
+                    <img src="p.jpeg" alt="Profile Photo">
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="height: 500px;">
+            <div class="form-container">
+                <h2>Add Product</h2>
+                <form id="addProductForm" style="height: 500px; width: 700px; font-size: 16px;">
+                    <div class="form-group">
+                        <label for="productName">Product Name</label>
+                        <input type="text" id="productName" name="productName" placeholder="Enter product name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="productDescription">Product Description</label>
+                        <textarea id="productDescription" name="productDescription" placeholder="Enter product description" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="productPrice">Product Price</label>
+                        <input type="number" id="productPrice" name="productPrice" placeholder="Enter product price" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="productCategory">Product Category</label>
+                        <select id="productCategory" name="productCategory" required>
+                            <option value="">Select a category</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Clothing">Clothing</option>
+                            <option value="Home">Home</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="productImage">Product Image</label>
+                        <input type="file" id="productImage" name="productImage" accept="image/*" required>
+                        <div id="imagePreview" class="image-preview">
+                            <img src="" alt="Image Preview" id="imgPreview" style="display: none;">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" id="submitBtn">Add Product</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const addProductForm = document.getElementById('addProductForm');
+            const productImage = document.getElementById('productImage');
+            const imgPreview = document.getElementById('imgPreview');
+            const submitBtn = document.getElementById('submitBtn');
+
+            // Preview the image when selected
+            productImage.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                
+                if (file) {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(event) {
+                        imgPreview.style.display = 'block';
+                        imgPreview.src = event.target.result; // Set the image preview to the uploaded file
+                    };
+                    
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Form submission
+            addProductForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simple form validation
+                const productName = document.getElementById('productName').value;
+                const productDescription = document.getElementById('productDescription').value;
+                const productPrice = document.getElementById('productPrice').value;
+                const productCategory = document.getElementById('productCategory').value;
+
+                if (!productName || !productDescription || !productPrice || !productCategory) {
+                    alert("Please fill in all the fields.");
+                    return;
+                }
+
+                // Create a product object
+                const productData = {
+                    name: productName,
+                    description: productDescription,
+                    price: parseFloat(productPrice),
+                    category: productCategory,
+                    image: imgPreview.src // Get the image data
+                };
+
+                console.log('Product Data:', productData);
+
+                // Reset form after successful submission
+                addProductForm.reset();
+                imgPreview.style.display = 'none';  // Hide the image preview
+                alert("Product Added Successfully!");
+            });
+
+            document.addEventListener('DOMContentLoaded', function () {
+    const menuToggleBtn = document.getElementById('menu-toggle-btn');
+    const sidebar = document.getElementById('sidebar');
+    const closeBtn = document.getElementById('close-btn');
+
+    // Toggle Sidebar on Menu Icon Click
+    menuToggleBtn.addEventListener('click', function () {
+        sidebar.classList.toggle('show');
+    });
+
+    // Close Sidebar on Close Icon Click
+    closeBtn.addEventListener('click', function () {
+        sidebar.classList.remove('show');
+    });
+});
+
+        });
+    </script>
+</body>
+</html>
