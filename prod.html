@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dash.css">
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
+    <script src="dash.js"></script>
+    <script src="orders.js"></script>
+    <title>Product</title>
+</head>
+<body>
+    <div class="container">
+        <div class="menu-toggle" id="menu-toggle-btn">
+            <i class='bx bx-menu'></i>  <!-- Menu Icon (hamburger) -->
+        </div>
+        <aside  class="hide">
+            <div class="top">
+                <div class="logo">
+                    <img src="logo.webp">
+                    <h2>EGA<span class="danger">TOR</span></h2>
+                </div>
+                <div class="close" id="close-btn">
+                    <i class='bx bx-message-square-x'></i>
+                </div>
+            </div>
+            <div class="sidebar">
+                <a href="index.html">
+                    <i class='bx bxs-dashboard'></i>
+                    <h3>Dashboard</h3>
+                </a>
+                <a href="Dashboard.html">
+                    <i class='bx bxs-contact'></i>
+                    <h3>All</h3>
+                </a>
+                <a href="msg.html">
+                    <i class='bx bx-receipt'></i>
+                    <h3>Customers</h3>
+                </a>
+                <a href="ana.html">
+                    <i class='bx bx-analyse'></i>
+                    <h3>Analytics</h3>
+                </a>
+                <a href="msg.html">
+                    <i class='bx bx-envelope'></i>
+                    <h3>Messages</h3>
+                    <span class="message-count">26</span>
+                </a>
+                <a href="prod.html" class="active">
+                    <i class='bx bxl-product-hunt'></i>
+                    <h3>Products</h3>
+                </a>
+                <a href="report.html">
+                    <i class='bx bxs-report'></i>
+                    <h3>Reports</h3>
+                </a>
+                <a href="add_prod.html">
+                    <i class='bx bx-plus'></i>
+                    <h3>Add Product</h3>
+                </a>
+                <a href="set.html">
+                    <i class='bx bx-log-out'></i>
+                    <h3>Logout</h3>
+                </a>
+            </div>
+        </aside>
+
+        <main>
+        <div class="recent-orders">
+            <h2>Recent Orders</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th >Product Name</th>
+                        <th>Product Number</th>
+                        <th>Payment</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+            <a href="#">Show All</a>
+        </div>
+    </main>
+
+        <div class="right">
+            <div class="top">
+                <button id="menu-btn">
+                    <i class='bx bx-menu'></i>
+                </button>
+                <div class="theme-toggler">
+                    <i class='bx bx-sun'></i>
+                    <i class='bx bx-moon'></i>
+                </div>
+                <div class="profile">
+                    <div class="info">
+                        <p>Hey, <b>Aliza</b></p>
+                        <small class="text-muted">Admin</small>
+                    </div>
+                    <div class="profile-photo">
+                        <img src="p.jpeg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
